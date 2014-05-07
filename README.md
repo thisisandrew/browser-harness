@@ -23,3 +23,5 @@ If the site you are testing has the viewport set `<meta name="viewport" content=
 e.g. http://localhost/#url=http://www.mywebsite.com
 e.g. http://localhost/#url=http://www.microsoft.com
 
+##Deployed Example
+http://thisisandrew.github.io/browser-harness/#url=http://www.microsoft.com
