@@ -1,0 +1,94 @@
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="js/Frame.js"></script>
+    <style>
+        body { font-family: Arial; font-size: 13px; color: #5d5d5d; margin: 0; padding: 0}
+        #header { background: #000; overflow: auto; color: #fff; }
+        .menu a:link, #menu a:hover, #menu a:visited { color: #fff; }
+        .menu { line-height: 26px; padding: 10px; float: left}
+        .menu ul { list-style-type: none; padding: 0; margin: 0; }
+        .menu li { display: inline; font-size: 1.2em; margin-right: 10px; background: transparent }
+        .menu li a { display: inline-block; text-decoration: none; padding: 3px 8px; border-radius: 3px; cursor: pointer }
+        .menu li.active a { background: #555 }
+        
+        #controls-list { float: right};
+        
+        #title { float:right; white-space: nowrap; margin-right: 20px;}
+        #title span { line-height: 6px; color: #555; }
+        h1, h3 { margin: 0; }
+        h3 { display: inline-block; margin: 3px 5px; }
+        .size { display: inline-block; font-style: italic }
+        
+        .wrapper { display: inline-block; margin: 5px 10px; border: 1px solid #ccc; }
+        #frames { padding: 10px; }
+        iframe  { border: 10px solid #ccc; display: block; }
+        
+        #footer { position: fixed; bottom: 4px; right: 4px; }
+    </style>
+    <title>Browser Harness</title>
+</head>
+<body>
+    <div id="header">
+        <div id="frames-list" class="menu">
+            <ul>
+                
+            </ul>
+        </div>
+        <div id="controls-list" class="menu">
+            <ul>
+                <li id="orientation-toggle" class="active">
+                    <a>portrait</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="frames">
+        
+    </div>
+    <div id="footer">
+        androohill@gmail.com
+    </div>
+    <script>
+        $(function(){
+            //http://en.wikipedia.org/wiki/List_of_displays_by_pixel_density
+            var screens = [
+                /* Old Phones */
+                { label: 'GalaxyAce',       w:320,      h:480,      dpr:1,      active: 1 },
+                
+                /* Phones */
+                { label: 'GalaxyS4',        w:1080,     h:1920,     dpr:3,      active: 1 },
+                { label: 'iPhone4',         w:640,      h:960,      dpr:2,      active: 1 },
+                { label: 'iPhone5',         w:640,      h:1136,     dpr:2,      active: 1 },
+                { label: 'BlackberryZ10',   w:768,      h:1280,     dpr:2.24375,active: 1 },
+                { label: 'BlackberryQ10',   w:768,      h:1280,     dpr:2.24375,active: 1 },
+                { label: 'Nexus5',          w:1080,     h:1920,     dpr:3,      active: 1 },
+                
+                
+                /* Tablets */
+                { label: 'iPad12',          w:768,      h:1024,     dpr:1,      active: 1 },
+                { label: 'iPad34',          w:1536,     h:2048,     dpr:2,      active: 1 },
+                { label: 'GalaxyNote10_1',  w:1600,     h:2560,     dpr:2,      active: 1 },
+                
+                
+                /* Desktops */
+                { label: 'LargeDesktop',    w:1200,     h:1920,     dpr:1,      active: 1 },
+                { label: 'Desktop',         w:800,      h:1280,     dpr:1,      active: 1 },
+            ];
+            
+            screens.map(function(conf){
+                Frameset.add(conf);
+            });
+            
+            $("#orientation-toggle").click(function(){
+                Frameset.orientationToggle();
+                $(this).find("a").text(Frameset.getOrientation());
+            });
+            
+            $(window).on('hashchange', function() {
+                Frameset.setURL();
+            });
+        });
+    </script>
+</body>
+</html>
